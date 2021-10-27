@@ -1,0 +1,39 @@
+<fieldset>
+<div class="question-fields">
+  <%= f.label :content, "Question " %><br/>
+  <%= f.text_area :content %><br/>
+
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Remove Question" %>
+
+
+
+
+
+  <%= f.fields_for :answers do |answer_form| %>
+          <%= render 'answer_fields', f: answer_form %>
+  <% end %>
+  <%= link_to_add_fields "Add Answer", f, :answers %>
+</fieldset>
+
+
+
+<fieldset>
+    <%#= f.label :content, "Question" %>  <br/>
+    <%#= f.text_area :content, :rows => 4, :columns => 250 %> <br/> 
+    <%#= f.check_box :_destroy %>
+    <%#= f.label :_destroy, "Remover Pregunta" %>
+<br/>
+
+    <%#= f.fields_for :answers do |builder| %>
+      <%#= render 'answer_fields', :f => builder %>
+    <%# end %>
+
+<br/>
+
+    </fieldset>
+<br/>
+<br/>
+
+
+</div>

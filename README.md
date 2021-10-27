@@ -19,7 +19,7 @@ Things you may want to cover:
 
 * Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+* Deployment instructions 
 
 * ...
 
@@ -28,12 +28,15 @@ Things you may want to cover:
 By stevepollito.desing
 
 
-1. Configuring the Model
-class Person < ApplicationRecord
-    has_many :addresses, inverse_of: :person
-    accepts_nested_attributes_for :addresses, allow_destroy: true, reject_if: :all_blank
-end
-2. Declare the Permitted Parameters
+# 1. Configuring the Model
+
+    class Person < ApplicationRecord
+        has_many :addresses, inverse_of: :person
+        accepts_nested_attributes_for :addresses, allow_destroy: true, reject_if: :all_blank
+    end
+
+# 2. Declare the Permitted Parameters
+
     class PeopleController < ApplicationController
         ...
         private
@@ -42,7 +45,8 @@ end
                 params.require(:person).permit(:first_name, :last_name, addresses_attributes: [:id, :kind, :street, :_destroy])
             end
     end
-3. Create a Form Partial
+# 3. Create a Form Partial
+
       <%# app/views/people/_address_fields.html.erb %>
       <div class="nested-fields">
           <%= f.hidden_field :_destroy %>
@@ -71,8 +75,9 @@ end
 
           <%= f.submit %>
       <% end %>
-4. Create a Helper Function
-      # app/helpers/application_helper.rb
+# 4. Create a Helper Function
+
+     app/helpers/application_helper.rb
       module ApplicationHelper
 
           # This method creates a link with `data-id` `data-fields` attributes. These attributes are used to create new instances of the nested fields through Javascript.
@@ -114,7 +119,7 @@ end
 
           end
       end
-5. Add Javascript
+# 5. Add Javascript
     // app/javascript/packs/nested-forms/addFields.js
     class addFields {
       // This executes when the function is instantiated.
@@ -155,7 +160,7 @@ end
     // Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work
     window.addEventListener('turbolinks:load', () => new addFields())
 
-next step 
+# next step 
 
     // app/javascript/packs/nested-forms/removeFields.js
     class removeFields {
@@ -192,7 +197,7 @@ next step
       }
     }
 
-And the last stepp
+# And the last stepp
 
 
     // Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work
